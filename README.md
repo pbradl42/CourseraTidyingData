@@ -30,6 +30,6 @@ The script takes the following steps:
 run_analysis.R creates 'tidyUCI.txt', a file with the following data:
 * Variable - the mean or std variable contained in the original set, representing the mean of the activity recorded in the original experiment. Each variable begins with 't' representing 'time' or 'f' representing 'frequency', what was measured, and the X, Y, or Z direction. 
 * Activity - English text description of the activity. One of 7 activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING)
-* SubjectIDa - a unique identifier for one of the 30 subjects participating in the UCI study. Numbers 1-30
+* SubjectID - a unique identifier for one of the 30 subjects participating in the UCI study. Numbers 1-30
 * Mean - the mean of the measurements taken of that variable for that subject doing that activity.
 
