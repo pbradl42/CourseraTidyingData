@@ -1,33 +1,3 @@
-collectFiles <- function(directory = ".") {
-  ## Read all the files in the directory and combine into one dataset
-  filelist <- list.files(directory, pattern = "*.txt")
-  myColNames <- read.table(paste(directory, "../features.txt", sep = ""))
-  
-  for (file in filelist) {
-    if (length(grep("y", file))) {
-        colname <- "ActivityID"
-    } else if (length(grep("subject", file))) {
-      colname <- "SubjectID"
-    #} else {
-      #colname <- myColNames[,2]
-    }
-    myFile <- paste(directory, file, sep = "")
-   ## message(myFile)
-    if(!exists("myData")) {
-      myData <- read.table(myFile)
-      if (ncol(myData) == 1) { colnames(myData) <- colname}
-    } else {
-      temp <- read.table(myFile)
-      if (ncol(temp) == 1) { colnames(temp) <- colname
-        myData <- cbind(temp, myData)
-      } else {
-        myData <- cbind(myData, temp)
-      }
-      rm(temp)
-    }
-  }
-  tbl_df(myData)
-}
 run_analysis <- function() {
 
   library(dplyr)
@@ -82,4 +52,34 @@ run_analysis <- function() {
   colnames(newTable)[4] <- "mean"
   write.table(newTable, file = "tidyUCI.txt", row.name = FALSE)
 
+}
+collectFiles <- function(directory = ".") {
+  ## Read all the files in the directory and combine into one dataset
+  filelist <- list.files(directory, pattern = "*.txt")
+  myColNames <- read.table(paste(directory, "../features.txt", sep = ""))
+  
+  for (file in filelist) {
+    if (length(grep("y", file))) {
+        colname <- "ActivityID"
+    } else if (length(grep("subject", file))) {
+      colname <- "SubjectID"
+    #} else {
+      #colname <- myColNames[,2]
+    }
+    myFile <- paste(directory, file, sep = "")
+   ## message(myFile)
+    if(!exists("myData")) {
+      myData <- read.table(myFile)
+      if (ncol(myData) == 1) { colnames(myData) <- colname}
+    } else {
+      temp <- read.table(myFile)
+      if (ncol(temp) == 1) { colnames(temp) <- colname
+        myData <- cbind(temp, myData)
+      } else {
+        myData <- cbind(myData, temp)
+      }
+      rm(temp)
+    }
+  }
+  tbl_df(myData)
 }
